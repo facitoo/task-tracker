@@ -1,24 +1,30 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+* Ruby version ~> 3.1.3
 
-* Ruby version
+* Rails ~> 7.0.8
 
-* System dependencies
+Steps to set up the service
+> `git clone`
 
-* Configuration
+> `bundle install`
 
-* Database creation
+Database creation
+> `rails db:migrate`
 
-* Database initialization
+Database initialization
+> For manual testing you need to create your own user with the following attributes 'first_name', 'last_name','email' and for Rspecs the user will be created automatically.
 
-* How to run the test suite
+How to run the test suite
+> `rails db:migrate RAILS_ENV=test` for creating test DB
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+API endpoint details 
+> `api/v1/tasks` will be used before each endpoint defined in routes.rb
 
-* ...
+Features / Functionalities : 
+> A user can create a task with a title and description. Given the user has a valid JWT token `(token secret = 'test')`. A task can be retrieved by Task ID or created by or assigned to the logged-in user. For updating a task user just needs to send the field and the value that needs to be updated.
+> Deletion can be done via the delete API which will require a task ID.
+
+
