@@ -38,9 +38,14 @@ class  Api::V1::Tasks::TasksController < ApplicationController
   end
 
   def delete
+    task_owner = @task.requester
     begin
-      @task.destroy!
-      render json: {"message": "item removed successfully"}, status: (201)
+      if task_owner.id == @current_user.id
+        @task.destroy!
+        render json: {"message": "item removed successfully"}, status: (201)
+      else
+        render json: {"message": "you cannot delete the given task, please ask the requester to perform this action"}, status: (401)
+      end
     rescue => e
       render json: {"message": e.message}, status: :unprocessable_entity
     end
